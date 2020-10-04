@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using ThinkerThings.DataContracts.Commands;
 using ThinkerThings.DataContracts.Common;
 using ThinkerThingsRaspy.PinManager.Pins;
+using ThinkerThingsRaspy.SignalRClient;
 using Windows.Devices.Gpio;
 
 namespace ThinkerThingsRaspy.PinManager
@@ -64,7 +67,27 @@ namespace ThinkerThingsRaspy.PinManager
             return result.ToArray();
         }
 
-        public void ChangePortState(string portName, PortStates portState)
+        internal void UpdatePortState(Pin pin, GpioPinValue gpioPinValue)
+        {
+            var portState = GpioPinValueToPortState(gpioPinValue);
+            var portName = _pinConfigurations.FirstOrDefault(p => p.PinId == pin.PinId).PortName;
+
+            var context = new ChangePortStateContext()
+            {
+                SetState = portState,
+                TargetPortName = portName
+            };
+
+            SignalRRaspyberryPiClient.Instance.UpdatePortState(context);
+        }
+
+        internal void ChangePortState(ChangePortStateContext context)
+        {
+            ChangePortState(context.TargetPortName, context.SetState);
+            SignalRRaspyberryPiClient.Instance.UpdatePortState(context);
+        }
+
+        private void ChangePortState(string portName, PortStates portState)
         {
             var pinConfiguration = _pinConfigurations.FirstOrDefault(p => p.PortName == portName);
             ChangePortState(pinConfiguration, portState);
@@ -76,7 +99,7 @@ namespace ThinkerThingsRaspy.PinManager
             ChangePortState(pinConfiguration, portState);
         }
 
-        public void ChangePortState(PinConfiguration pinConfiguration, PortStates portState)
+        private void ChangePortState(PinConfiguration pinConfiguration, PortStates portState)
         {
             switch (pinConfiguration.PortType)
             {

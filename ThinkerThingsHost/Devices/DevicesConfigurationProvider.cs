@@ -37,6 +37,15 @@ namespace ThinkerThingsHost.Devices
             {
                 new RaspyberryPiPort()
                 {
+                    PinId = 16,
+                    PortName = "portão",
+                    PortState = PortStates.Actived,
+                    PortType = PortTypes.Pulse,
+                    DefaultPortState = PortStates.Actived,
+                    PulseLength = 5000
+                },
+                new RaspyberryPiPort()
+                {
                     PinId = 20,
                     PortName = "luz do quarto",
                     PortState = PortStates.Deactived,

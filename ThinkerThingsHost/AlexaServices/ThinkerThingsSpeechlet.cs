@@ -5,17 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ThinkerThingsHost.AlexaServices.IntentExecutor;
 using ThinkerThingsHost.Interfaces;
 
 namespace ThinkerThingsHost.AlexaServices
 {
     internal class ThinkerThingsSpeechlet : SpeechletBase, ISpeechletWithContext, IThinkerThingsSpeechlet
     {
-        private static readonly string[] SetStatusIntents = new string[]
-        {
-            AlexaIntents.ActivateIntent,
-            AlexaIntents.DeactivateIntent,
-        };
 
         private readonly IAlexaProxyService _alexaProxyService;
 
@@ -36,21 +32,22 @@ namespace ThinkerThingsHost.AlexaServices
         public SpeechletResponse OnIntent(IntentRequest intentRequest, Session session, Context context)
         {
             Intent intent = intentRequest.Intent;
-            string intentName = intent?.Name;
-            var comparer = StringComparer.InvariantCultureIgnoreCase;
 
-            if (string.Equals("getStatusIntent", intentName, StringComparison.InvariantCultureIgnoreCase))
+            var intentExecutorContext = IntentExecutorContext.FromSession(session);
+
+            var intentExecutor = IntentExecutorLocator.GetExecutorForIntent(intent.Name);
+            var result = intentExecutor.Execute(intentExecutorContext, intent, _alexaProxyService);
+
+            if (result.NeedConfirmation)
             {
-                return GetStatus(intent, session);
+                result.PersistInSession(session);
             }
-            else if (SetStatusIntents.Contains(intentName, comparer))
+            else if (intentExecutorContext != null)
             {
-                return SetStatus(intent, session);
+                session.Attributes.Remove(IntentExecutorContext.JsonAttributeKey);
             }
-            else
-            {
-                throw new SpeechletException("Invalid Intent");
-            }
+
+            return BuildSpeechletResponse("Resposta", result.Response, false);
         }
 
         public void OnSessionEnded(SessionEndedRequest sessionEndedRequest, Session session, Context context)

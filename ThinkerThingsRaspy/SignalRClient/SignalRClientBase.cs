@@ -13,7 +13,7 @@ namespace ThinkerThingsRaspy.SignalRClient
         protected readonly ThinkerThingsHubConnection _thinkerThingsHubConnection;
         private readonly HubConnection _hubConnection;
 
-        private const string _baseUrl = "https://0efb800f04a1.ngrok.io/";
+        private const string _baseUrl = "https://38b3cb373bf8.ngrok.io/";
 
         protected SignalRClientBase()
         {

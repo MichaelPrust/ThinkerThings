@@ -13,6 +13,7 @@ namespace ThinkerThingsHost.Interfaces
         void UpdatePortState(ChangePortStateContext changePortStateContext, string requesterId);
         void LoadDevice(GenericConfiguration genericConfiguration);
         GenericConfiguration GetDeviceByName(string deviceName);
+        GenericConfiguration[] GetAllDevices();
         GenericConfiguration GetDeviceById(string id);
     }
 }

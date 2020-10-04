@@ -17,7 +17,7 @@ namespace ThinkerThingsRaspy.PinManager.Pins
 
         protected override void ChangeValue(GpioPinValue value)
         {
-            _gpioPin.Write(GpioPinValue);
+            _gpioPin.Write(value);
             _pulseId++;
             var pulseId = _pulseId;
             Task.Run(() => PulseControl(pulseId));
@@ -27,8 +27,10 @@ namespace ThinkerThingsRaspy.PinManager.Pins
         {
             await Task.Delay(_pulseLength);
             if (!_disposed && (_pulseId == pulseId))
+            {
                 _gpioPin.Write(_defaultGpioPinValue);
-
+                RaspyPinManager.Instance.UpdatePortState(this, _defaultGpioPinValue);
+            }
         }
 
     }

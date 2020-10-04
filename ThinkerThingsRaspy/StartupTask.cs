@@ -7,6 +7,7 @@ using Windows.ApplicationModel.Background;
 using ThinkerThingsRaspy.SignalRClient;
 using ThinkerThingsRaspy.WebServer;
 using Windows.System.Threading;
+using System.Threading;
 
 // The Background Application template is documented at http://go.microsoft.com/fwlink/?LinkID=533884&clcid=0x409
 
@@ -18,16 +19,13 @@ namespace ThinkerThingsRaspy
 
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
-            SignalRRaspyberryPiClient.Initialize();
-
             _deferral = taskInstance.GetDeferral();
 
+            SignalRRaspyberryPiClient.Initialize();
             var webserver = new MyWebserver();
+            var thread = new Thread(() => webserver.Start());
+            thread.Start();
 
-            await ThreadPool.RunAsync(workItem =>
-            {                
-                webserver.Start();
-            });
         }
     }
 }

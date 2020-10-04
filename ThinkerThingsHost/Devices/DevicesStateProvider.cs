@@ -122,6 +122,11 @@ namespace ThinkerThingsHost.Devices
             return GetAllPorts().FirstOrDefault(p => string.Equals(p.Item1.PortName, portName, StringComparison.InvariantCultureIgnoreCase));
         }
 
+        public GenericConfiguration[] GetAllDevices()
+        {
+            return _devices.ToArray();
+        }
+
         private class DevicePortState : IDevicePortState
         {
             private readonly DevicePort _port;
@@ -136,6 +141,8 @@ namespace ThinkerThingsHost.Devices
             public PortStates PortState => _port.PortState;
             public string DeviceName => _genericConfiguration.DeviceName;
             public string ConnectionId => _genericConfiguration.ConnectionId;
+            public PortTypes PortType => _port.PortType;
+            public PortStates DefaultPortState => _port.DefaultPortState;
         }
 
     }

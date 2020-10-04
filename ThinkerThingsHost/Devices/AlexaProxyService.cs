@@ -16,12 +16,12 @@ namespace ThinkerThingsHost.Devices
     {
         private static readonly string[] ActivateIntents = new string[]
         {
-            AlexaIntents.ActivateIntent
+            AlexaIntents.ActivateIntent.Name
         };
 
         private static readonly string[] DeactivateIntents = new string[]
         {
-            AlexaIntents.DeactivateIntent
+            AlexaIntents.DeactivateIntent.Name
         };
 
         private readonly IDevicesStateProvider _devicesStateProvider;
@@ -92,6 +92,61 @@ namespace ThinkerThingsHost.Devices
             result = ObterRespostaDeAcordoComOEstadoRequisitado(portName, intentName, targetPortState);
 
             return result;
+        }
+
+        public string[] GetAllPorts(PortTypes portType)
+        {
+            return _devicesStateProvider.GetAllDevices().SelectMany(p => p.Ports.Where(x => x.PortType == portType).Select(x => x.PortName)).ToArray();
+        }
+
+        public bool ActivatePort(string portName)
+        {
+            var port = _devicesStateProvider.GetStateOfPort(portName);
+            if (port != null && port.PortType != PortTypes.Switch)
+                throw new InvalidOperationException($"O dispositivo '{portName}' não suporta esta operação");
+
+            if (port == null || port.PortState == PortStates.Actived)
+                return false;
+
+            AlterarEstadoDaPorta(portName, PortStates.Actived, port);
+            return true;
+        }
+
+        public bool DeactivatePort(string portName)
+        {
+            var port = _devicesStateProvider.GetStateOfPort(portName);
+            if (port != null && port.PortType != PortTypes.Switch)
+                throw new InvalidOperationException($"O dispositivo '{portName}' não suporta esta operação");
+
+            if (port == null || port.PortState == PortStates.Deactived)
+                return false;
+
+            AlterarEstadoDaPorta(portName, PortStates.Deactived, port);
+            return true;
+        }
+
+        public bool PulsePort(string portName)
+        {
+            var port = _devicesStateProvider.GetStateOfPort(portName);
+            if (port != null && port.PortType != PortTypes.Pulse)
+                throw new InvalidOperationException($"O dispositivo '{portName}' não suporta esta operação");
+
+            if (port == null || port.PortState != port.DefaultPortState)
+                return false;
+
+            switch (port.DefaultPortState)
+            {
+                case PortStates.Actived:
+                    AlterarEstadoDaPorta(portName, PortStates.Deactived, port);
+                    break;
+                case PortStates.Deactived:
+                    AlterarEstadoDaPorta(portName, PortStates.Actived, port);
+                    break;
+                default:
+                    throw new InvalidOperationException($"O estado '{port.DefaultPortState}' não possui um oposto para realizar a ativação");
+            }
+            
+            return true;
         }
 
         private string TraduzirSinonimosDaMensagem(string message)
@@ -171,7 +226,6 @@ namespace ThinkerThingsHost.Devices
 
             return result;
         }
-
     }
 
 }

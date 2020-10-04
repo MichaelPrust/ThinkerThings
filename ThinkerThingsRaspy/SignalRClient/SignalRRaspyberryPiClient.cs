@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using ThinkerThings.DataContracts.Commands;
 using ThinkerThings.DataContracts.Devices;
@@ -29,10 +30,8 @@ namespace ThinkerThingsRaspy.SignalRClient
                 Instance = new SignalRRaspyberryPiClient();
                 Instance.Configure();
 
-                ThreadPool.RunAsync(workItem =>
-                {
-                    Instance.StartConnection();
-                });
+                var thread = new Thread(() => Instance.StartConnection());
+                thread.Start();
             }
         }
 
@@ -41,9 +40,14 @@ namespace ThinkerThingsRaspy.SignalRClient
             var context = changePortStateContext;
             await Task.Run(() =>
             {
-                RaspyPinManager.Instance.ChangePortState(context.TargetPortName, changePortStateContext.SetState);
+                RaspyPinManager.Instance.ChangePortState(context);
             });
 
+            UpdatePortState(changePortStateContext);
+        }
+
+        public void UpdatePortState(ChangePortStateContext changePortStateContext)
+        {
             _thinkerThingsHubConnection.UpdatePortState(changePortStateContext);
         }
 
