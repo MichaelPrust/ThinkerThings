@@ -7,11 +7,13 @@ namespace AlexaSkillsKit.Interfaces.AudioPlayer.Directives
     /// </summary>
     public class AudioPlayerClearQueueDirective : AudioPlayerDirective
     {
-        public AudioPlayerClearQueueDirective() : base("ClearQueue") {
+        public AudioPlayerClearQueueDirective() : base("ClearQueue")
+        {
 
         }
 
-        public virtual ClearBehaviorEnum ClearBehavior {
+        public virtual ClearBehaviorEnum ClearBehavior
+        {
             get;
             set;
         }

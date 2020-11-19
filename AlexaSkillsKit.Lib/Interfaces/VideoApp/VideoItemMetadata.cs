@@ -7,12 +7,14 @@ namespace AlexaSkillsKit.Interfaces.VideoApp
     /// </summary>
     public class VideoItemMetadata
     {
-        public virtual string Title {
+        public virtual string Title
+        {
             get;
             set;
         }
 
-        public virtual string Subtitle {
+        public virtual string Subtitle
+        {
             get;
             set;
         }

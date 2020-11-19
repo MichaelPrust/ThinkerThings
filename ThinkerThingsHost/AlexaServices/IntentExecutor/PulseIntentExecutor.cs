@@ -1,10 +1,6 @@
 ﻿using AlexaSkillsKit.Slu;
-using AlexaSkillsKit.Speechlet;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using ThinkerThings.DataContracts.Common;
 using ThinkerThingsHost.Interfaces;
 

@@ -7,7 +7,8 @@ namespace AlexaSkillsKit.Interfaces.AudioPlayer.Directives
     /// </summary>
     public class AudioPlayerStopDirective : AudioPlayerDirective
     {
-        public AudioPlayerStopDirective() : base("Stop") {
+        public AudioPlayerStopDirective() : base("Stop")
+        {
 
         }
     }

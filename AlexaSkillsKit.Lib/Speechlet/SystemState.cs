@@ -9,10 +9,12 @@ namespace AlexaSkillsKit.Speechlet
     /// </summary>
     public class SystemState : ISpeechletInterfaceState
     {
-        public static SystemState FromJson(JObject json) {
+        public static SystemState FromJson(JObject json)
+        {
             if (json == null) return null;
 
-            return new SystemState {
+            return new SystemState
+            {
                 Application = Application.FromJson(json.Value<JObject>("application")),
                 User = User.FromJson(json.Value<JObject>("user")),
                 Device = Device.FromJson(json.Value<JObject>("device")),
@@ -21,27 +23,32 @@ namespace AlexaSkillsKit.Speechlet
             };
         }
 
-        public Application Application {
+        public Application Application
+        {
             get;
             private set;
         }
 
-        public User User {
+        public User User
+        {
             get;
             private set;
         }
 
-        public Device Device {
+        public Device Device
+        {
             get;
             private set;
         }
 
-        public string ApiEndpoint {
+        public string ApiEndpoint
+        {
             get;
             private set;
         }
 
-        public string ApiAccessToken {
+        public string ApiAccessToken
+        {
             get;
             private set;
         }

@@ -7,7 +7,8 @@ namespace AlexaSkillsKit.Interfaces.AudioPlayer
     /// </summary>
     public class AudioItem
     {
-        public virtual AudioItemStream Stream {
+        public virtual AudioItemStream Stream
+        {
             get;
             set;
         }

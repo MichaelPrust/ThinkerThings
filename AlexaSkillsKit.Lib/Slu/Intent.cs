@@ -1,9 +1,9 @@
 ﻿// Copyright 2018 Stefan Negritoiu (FreeBusy) and contributors. See LICENSE file for more information.
 
-using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AlexaSkillsKit.Slu
 {
@@ -17,7 +17,8 @@ namespace AlexaSkillsKit.Slu
         /// </summary>
         /// <param name="json"></param>
         /// <returns></returns>
-        public static Intent FromJson(JObject json) {
+        public static Intent FromJson(JObject json)
+        {
             if (json == null) return null;
 
             var slots = json.Value<JObject>("slots")?.Children<JProperty>()
@@ -25,24 +26,28 @@ namespace AlexaSkillsKit.Slu
             ConfirmationStatusEnum confirmationStatus;
             Enum.TryParse(json.Value<string>("confirmationStatus"), out confirmationStatus);
 
-            return new Intent {
+            return new Intent
+            {
                 Name = json.Value<string>("name"),
                 ConfirmationStatus = confirmationStatus,
                 Slots = slots ?? new Dictionary<string, Slot>()
             };
         }
 
-        public virtual string Name {
+        public virtual string Name
+        {
             get;
             set;
         }
 
-        public virtual ConfirmationStatusEnum ConfirmationStatus {
+        public virtual ConfirmationStatusEnum ConfirmationStatus
+        {
             get;
             set;
         }
 
-        public virtual IDictionary<string, Slot> Slots {
+        public virtual IDictionary<string, Slot> Slots
+        {
             get;
             set;
         }

@@ -4,15 +4,17 @@ namespace AlexaSkillsKit.UI
 {
     public class PlainTextOutputSpeech : OutputSpeech
     {
-        public override string Type {
-            get { return "PlainText";  }
+        public override string Type
+        {
+            get { return "PlainText"; }
         }
 
-        public virtual string Text {
+        public virtual string Text
+        {
             get;
             set;
         }
-        
+
         public static implicit operator PlainTextOutputSpeech(string spokenText)
         {
             return new PlainTextOutputSpeech()

@@ -9,11 +9,13 @@ namespace AlexaSkillsKit.Interfaces.Display.Directives
     /// </summary>
     public class DisplayRenderTemplateDirective : Directive
     {
-        public DisplayRenderTemplateDirective() : base("Display.RenderTemplate") {
+        public DisplayRenderTemplateDirective() : base("Display.RenderTemplate")
+        {
 
         }
 
-        public virtual DisplayTemplate Template {
+        public virtual DisplayTemplate Template
+        {
             get;
             set;
         }

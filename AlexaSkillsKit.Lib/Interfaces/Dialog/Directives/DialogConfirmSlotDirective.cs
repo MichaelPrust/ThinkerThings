@@ -7,11 +7,13 @@ namespace AlexaSkillsKit.Interfaces.Dialog.Directives
     /// </summary>
     public class DialogConfirmSlotDirective : DialogDirective
     {
-        public DialogConfirmSlotDirective() : base("ConfirmSlot") {
+        public DialogConfirmSlotDirective() : base("ConfirmSlot")
+        {
 
         }
 
-        public virtual string SlotToConfirm {
+        public virtual string SlotToConfirm
+        {
             get;
             set;
         }

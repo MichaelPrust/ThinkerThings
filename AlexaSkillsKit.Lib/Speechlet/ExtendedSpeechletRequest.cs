@@ -11,17 +11,20 @@ namespace AlexaSkillsKit.Speechlet
     /// </summary>
     public class ExtendedSpeechletRequest : SpeechletRequest
     {
-        public ExtendedSpeechletRequest(string type, string subtype, JObject json) : base(json) {
+        public ExtendedSpeechletRequest(string type, string subtype, JObject json) : base(json)
+        {
             Type = type;
             Subtype = subtype;
         }
 
-        public string Type {
+        public string Type
+        {
             get;
             private set;
         }
 
-        public string Subtype {
+        public string Subtype
+        {
             get;
             private set;
         }

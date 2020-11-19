@@ -1,8 +1,8 @@
 ﻿// Copyright 2018 Stefan Negritoiu (FreeBusy) and contributors. See LICENSE file for more information.
 
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 
 namespace AlexaSkillsKit.Speechlet
 {
@@ -16,18 +16,22 @@ namespace AlexaSkillsKit.Speechlet
         /// </summary>
         /// <param name="json"></param>
         /// <returns></returns>
-        public static Session FromJson(JObject json) {
+        public static Session FromJson(JObject json)
+        {
             if (json == null) return null;
 
             var attributes = new Dictionary<string, string>();
             var jsonAttributes = json.Value<JObject>("attributes");
-            if (jsonAttributes != null) {
-                foreach (var attrib in jsonAttributes.Children()) {
+            if (jsonAttributes != null)
+            {
+                foreach (var attrib in jsonAttributes.Children())
+                {
                     attributes.Add(attrib.Value<JProperty>().Name, attrib.Value<JProperty>().Value.ToString());
                 }
             }
 
-            return new Session {
+            return new Session
+            {
                 SessionId = json.Value<string>("sessionId"),
                 IsNew = json.Value<bool>("new"),
                 User = User.FromJson(json.Value<JObject>("user")),
@@ -36,35 +40,42 @@ namespace AlexaSkillsKit.Speechlet
             };
         }
 
-        public virtual string SessionId {
+        public virtual string SessionId
+        {
             get;
             set;
         }
 
-        public virtual bool IsNew {
+        public virtual bool IsNew
+        {
             get;
             set;
         }
 
-        public virtual Application Application {
+        public virtual Application Application
+        {
             get;
             set;
         }
 
-        public virtual User User {
+        public virtual User User
+        {
             get;
             set;
         }
 
-        public virtual Dictionary<string, string> Attributes {
+        public virtual Dictionary<string, string> Attributes
+        {
             get;
             set;
         }
 
-        public virtual string[] IntentSequence {
-            get {
+        public virtual string[] IntentSequence
+        {
+            get
+            {
                 return !Attributes.ContainsKey(INTENT_SEQUENCE) || String.IsNullOrEmpty(Attributes[INTENT_SEQUENCE]) ?
-                    new string[0] : 
+                    new string[0] :
                     Attributes[INTENT_SEQUENCE].Split(
                         new string[1] { SEPARATOR }, StringSplitOptions.RemoveEmptyEntries);
             }

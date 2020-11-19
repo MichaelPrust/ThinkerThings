@@ -7,22 +7,26 @@ namespace AlexaSkillsKit.Interfaces.Display
     /// </summary>
     public class DisplayImageSource
     {
-        public virtual string Url {
+        public virtual string Url
+        {
             get;
             set;
         }
 
-        public virtual ImageSizeEnum Size {
+        public virtual ImageSizeEnum Size
+        {
             get;
             set;
         }
 
-        public virtual int WidthPixels {
+        public virtual int WidthPixels
+        {
             get;
             set;
         }
 
-        public virtual int HeightPixels {
+        public virtual int HeightPixels
+        {
             get;
             set;
         }

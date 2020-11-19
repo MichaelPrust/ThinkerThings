@@ -7,11 +7,13 @@ namespace AlexaSkillsKit.Speechlet
     /// </summary>
     public class Directive
     {
-        public Directive(string type) {
+        public Directive(string type)
+        {
             Type = type;
         }
 
-        public virtual string Type {
+        public virtual string Type
+        {
             get;
             private set;
         }

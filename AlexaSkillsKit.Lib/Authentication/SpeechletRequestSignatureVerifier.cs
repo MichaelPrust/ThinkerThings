@@ -1,18 +1,15 @@
 ﻿// Copyright 2018 Stefan Negritoiu (FreeBusy) and contributors. See LICENSE file for more information.
 
+using Org.BouncyCastle.Security.Certificates;
+using Org.BouncyCastle.X509;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 //using System.Runtime.Caching;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Org.BouncyCastle.X509;
-using Org.BouncyCastle.Security.Certificates;
 
 namespace AlexaSkillsKit.Authentication
 {
@@ -32,13 +29,16 @@ namespace AlexaSkillsKit.Authentication
         /// Verifying the Signature Certificate URL per requirements documented at
         /// https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-web-service
         /// </summary>
-        public static bool VerifyCertificateUrl(string certChainUrl) {
-            if (String.IsNullOrEmpty(certChainUrl)) {
+        public static bool VerifyCertificateUrl(string certChainUrl)
+        {
+            if (String.IsNullOrEmpty(certChainUrl))
+            {
                 return false;
             }
 
             Uri certChainUri;
-            if (!Uri.TryCreate(certChainUrl, UriKind.Absolute, out certChainUri)) {
+            if (!Uri.TryCreate(certChainUrl, UriKind.Absolute, out certChainUri))
+            {
                 return false;
             }
 
@@ -54,13 +54,15 @@ namespace AlexaSkillsKit.Authentication
         /// Verifies request signature and manages the caching of the signature certificate
         /// </summary>
         public static bool VerifyRequestSignature(
-            byte[] serializedSpeechletRequest, string expectedSignature, string certChainUrl) {
+            byte[] serializedSpeechletRequest, string expectedSignature, string certChainUrl)
+        {
 
             string certCacheKey = _getCertCacheKey(certChainUrl);
             //X509Certificate cert = MemoryCache.Default.Get(certCacheKey) as X509Certificate;
             X509Certificate cert = _certCache.Get(certCacheKey) as X509Certificate;
             if (cert == null ||
-                !CheckRequestSignature(serializedSpeechletRequest, expectedSignature, cert)) {
+                !CheckRequestSignature(serializedSpeechletRequest, expectedSignature, cert))
+            {
 
                 // download the cert 
                 // if we don't have it in cache or
@@ -81,13 +83,15 @@ namespace AlexaSkillsKit.Authentication
         /// Verifies request signature and manages the caching of the signature certificate
         /// </summary>
         public async static Task<bool> VerifyRequestSignatureAsync(
-            byte[] serializedSpeechletRequest, string expectedSignature, string certChainUrl) {
+            byte[] serializedSpeechletRequest, string expectedSignature, string certChainUrl)
+        {
 
             string certCacheKey = _getCertCacheKey(certChainUrl);
             //X509Certificate cert = MemoryCache.Default.Get(certCacheKey) as X509Certificate;
             X509Certificate cert = _certCache.Get(certCacheKey) as X509Certificate;
             if (cert == null ||
-                !CheckRequestSignature(serializedSpeechletRequest, expectedSignature, cert)) {
+                !CheckRequestSignature(serializedSpeechletRequest, expectedSignature, cert))
+            {
 
                 // download the cert 
                 // if we don't have it in cache or 
@@ -107,10 +111,11 @@ namespace AlexaSkillsKit.Authentication
         /// <summary>
         /// 
         /// </summary>
-        public static X509Certificate RetrieveAndVerifyCertificate(string certChainUrl) {
+        public static X509Certificate RetrieveAndVerifyCertificate(string certChainUrl)
+        {
             // making requests to externally-supplied URLs is an open invitation to DoS
             // so restrict host to an Alexa controlled subdomain/path
-            if (!VerifyCertificateUrl(certChainUrl)) 
+            if (!VerifyCertificateUrl(certChainUrl))
                 return null;
 
             using (var webClient = new WebClient())
@@ -141,7 +146,8 @@ namespace AlexaSkillsKit.Authentication
         /// <summary>
         /// 
         /// </summary>
-        public async static Task<X509Certificate> RetrieveAndVerifyCertificateAsync(string certChainUrl) {
+        public async static Task<X509Certificate> RetrieveAndVerifyCertificateAsync(string certChainUrl)
+        {
             // making requests to externally-supplied URLs is an open invitation to DoS
             // so restrict host to an Alexa controlled subdomain/path
             if (!VerifyCertificateUrl(certChainUrl)) return null;
@@ -153,14 +159,17 @@ namespace AlexaSkillsKit.Authentication
 
             var pemReader = new Org.BouncyCastle.OpenSsl.PemReader(new StringReader(content));
             var cert = (X509Certificate)pemReader.ReadObject();
-            try {
-                cert.CheckValidity(); 
+            try
+            {
+                cert.CheckValidity();
                 if (!CheckCertSubjectNames(cert)) return null;
             }
-            catch (CertificateExpiredException) {
+            catch (CertificateExpiredException)
+            {
                 return null;
             }
-            catch (CertificateNotYetValidException) {
+            catch (CertificateNotYetValidException)
+            {
                 return null;
             }
 
@@ -172,20 +181,23 @@ namespace AlexaSkillsKit.Authentication
         /// 
         /// </summary>
         public static bool CheckRequestSignature(
-            byte[] serializedSpeechletRequest, string expectedSignature, Org.BouncyCastle.X509.X509Certificate cert) {
+            byte[] serializedSpeechletRequest, string expectedSignature, Org.BouncyCastle.X509.X509Certificate cert)
+        {
 
             byte[] expectedSig = null;
-            try {
+            try
+            {
                 expectedSig = Convert.FromBase64String(expectedSignature);
             }
-            catch (FormatException) {
+            catch (FormatException)
+            {
                 return false;
             }
 
             var publicKey = (Org.BouncyCastle.Crypto.Parameters.RsaKeyParameters)cert.GetPublicKey();
             var signer = Org.BouncyCastle.Security.SignerUtilities.GetSigner(Sdk.SIGNATURE_ALGORITHM);
             signer.Init(false, publicKey);
-            signer.BlockUpdate(serializedSpeechletRequest, 0, serializedSpeechletRequest.Length);            
+            signer.BlockUpdate(serializedSpeechletRequest, 0, serializedSpeechletRequest.Length);
 
             return signer.VerifySignature(expectedSig);
         }
@@ -194,13 +206,17 @@ namespace AlexaSkillsKit.Authentication
         /// <summary>
         /// 
         /// </summary>
-        private static bool CheckCertSubjectNames(X509Certificate cert) {
+        private static bool CheckCertSubjectNames(X509Certificate cert)
+        {
             bool found = false;
             ArrayList subjectNamesList = (ArrayList)cert.GetSubjectAlternativeNames();
-            for (int i=0; i < subjectNamesList.Count; i++) {
+            for (int i = 0; i < subjectNamesList.Count; i++)
+            {
                 ArrayList subjectNames = (ArrayList)subjectNamesList[i];
-                for (int j = 0; j < subjectNames.Count; j++) {
-                    if (subjectNames[j] is String && subjectNames[j].Equals(Sdk.ECHO_API_DOMAIN_NAME)) {
+                for (int j = 0; j < subjectNames.Count; j++)
+                {
+                    if (subjectNames[j] is String && subjectNames[j].Equals(Sdk.ECHO_API_DOMAIN_NAME))
+                    {
                         found = true;
                         break;
                     }
@@ -230,7 +246,7 @@ namespace AlexaSkillsKit.Authentication
                             _cacheDict.Remove(key);
                         }
                     }
-                        
+
                     return null;
                 }
             }

@@ -9,15 +9,18 @@ namespace AlexaSkillsKit.Speechlet
     {
         public SpeechletRequestValidationResult ValidationResult { get; }
 
-        public SpeechletValidationException(SpeechletRequestValidationResult validationResult) : base() {
+        public SpeechletValidationException(SpeechletRequestValidationResult validationResult) : base()
+        {
             ValidationResult = validationResult;
         }
 
-        public SpeechletValidationException(SpeechletRequestValidationResult validationResult, string message) : base(message) {
+        public SpeechletValidationException(SpeechletRequestValidationResult validationResult, string message) : base(message)
+        {
             ValidationResult = validationResult;
         }
 
-        public SpeechletValidationException(SpeechletRequestValidationResult validationResult, string message, Exception cause) : base(message, cause) {
+        public SpeechletValidationException(SpeechletRequestValidationResult validationResult, string message, Exception cause) : base(message, cause)
+        {
             ValidationResult = validationResult;
         }
     }

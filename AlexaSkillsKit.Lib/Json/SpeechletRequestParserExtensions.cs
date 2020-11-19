@@ -8,9 +8,12 @@ namespace AlexaSkillsKit.Json
 {
     public static class SpeechletRequestParserExtensions
     {
-        public static void AddStandard(this SpeechletRequestParser parser) {
-            parser.AddInterface(string.Empty, (subtype, json) => {
-                switch (subtype) {
+        public static void AddStandard(this SpeechletRequestParser parser)
+        {
+            parser.AddInterface(string.Empty, (subtype, json) =>
+            {
+                switch (subtype)
+                {
                     case "LaunchRequest":
                         return new LaunchRequest(json);
                     case "IntentRequest":
@@ -22,9 +25,12 @@ namespace AlexaSkillsKit.Json
             });
         }
 
-        public static void AddSystem(this SpeechletRequestParser parser) {
-            parser.AddInterface(SystemRequest.TypeName, (subtype, json) => {
-                switch (subtype) {
+        public static void AddSystem(this SpeechletRequestParser parser)
+        {
+            parser.AddInterface(SystemRequest.TypeName, (subtype, json) =>
+            {
+                switch (subtype)
+                {
                     case "ExceptionEncountered":
                         return new SystemExceptionEncounteredRequest(subtype, json);
                 }
@@ -32,9 +38,12 @@ namespace AlexaSkillsKit.Json
             });
         }
 
-        public static void AddAudioPlayer(this SpeechletRequestParser parser) {
-            parser.AddInterface(AudioPlayerRequest.TypeName, (subtype, json) => {
-                switch (subtype) {
+        public static void AddAudioPlayer(this SpeechletRequestParser parser)
+        {
+            parser.AddInterface(AudioPlayerRequest.TypeName, (subtype, json) =>
+            {
+                switch (subtype)
+                {
                     case "PlaybackFailed":
                         return new AudioPlayerPlaybackFailedRequest(subtype, json);
                     default:
@@ -43,11 +52,13 @@ namespace AlexaSkillsKit.Json
             });
         }
 
-        public static void AddPlaybackController(this SpeechletRequestParser parser) {
+        public static void AddPlaybackController(this SpeechletRequestParser parser)
+        {
             parser.AddInterface(PlaybackControllerRequest.TypeName, (subtype, json) => new PlaybackControllerRequest(subtype, json));
         }
 
-        public static void AddDisplay(this SpeechletRequestParser parser) {
+        public static void AddDisplay(this SpeechletRequestParser parser)
+        {
             parser.AddInterface(DisplayRequest.TypeName, (subtype, json) => new DisplayRequest(subtype, json));
         }
     }

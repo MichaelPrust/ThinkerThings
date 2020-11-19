@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using ThinkerThings.DataContracts.Commands;
 using ThinkerThings.DataContracts.Common;
 using ThinkerThings.DataContracts.Devices;
@@ -18,7 +17,7 @@ namespace ThinkerThingsHost.Devices
         {
             if (string.IsNullOrWhiteSpace(id))
                 throw new ArgumentNullException(nameof(id));
-            
+
             lock (_lock)
             {
                 return FindDeviceById(id);

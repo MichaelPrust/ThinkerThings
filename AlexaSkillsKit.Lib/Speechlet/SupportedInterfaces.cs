@@ -1,11 +1,11 @@
 ﻿// Copyright 2018 Stefan Negritoiu (FreeBusy) and contributors. See LICENSE file for more information.
 
-using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
-using System.Linq;
-using AlexaSkillsKit.Interfaces.Display;
 using AlexaSkillsKit.Interfaces.AudioPlayer;
+using AlexaSkillsKit.Interfaces.Display;
 using AlexaSkillsKit.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AlexaSkillsKit.Speechlet
 {
@@ -17,12 +17,14 @@ namespace AlexaSkillsKit.Speechlet
         /// <summary>
         /// Register supported interfaces for deserialization
         /// </summary>
-        static SupportedInterfaces() {
+        static SupportedInterfaces()
+        {
             Deserializer<ISpeechletInterface>.RegisterDeserializer("Display", DisplayInterface.FromJson);
             Deserializer<ISpeechletInterface>.RegisterDeserializer("AudioPlayer", AudioPlayerInterface.FromJson);
         }
 
-        public static SupportedInterfaces FromJson(JObject json) {
+        public static SupportedInterfaces FromJson(JObject json)
+        {
             if (json == null) return null;
 
             var dictionary = json.Children<JProperty>()

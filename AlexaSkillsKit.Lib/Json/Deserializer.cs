@@ -10,11 +10,13 @@ namespace AlexaSkillsKit.Json
     {
         private static IDictionary<string, Func<JObject, T>> deserializers = new Dictionary<string, Func<JObject, T>>();
 
-        public static void RegisterDeserializer(string name, Func<JObject, T> fromJson) {
+        public static void RegisterDeserializer(string name, Func<JObject, T> fromJson)
+        {
             deserializers.Add(name, fromJson);
         }
 
-        public static T FromJson(JProperty json) {
+        public static T FromJson(JProperty json)
+        {
             if (json == null || !deserializers.ContainsKey(json.Name)) return default(T);
 
             return deserializers[json.Name](json.Value as JObject);

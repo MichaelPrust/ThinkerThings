@@ -9,11 +9,13 @@ namespace AlexaSkillsKit.Interfaces.VideoApp.Directives
     /// </summary>
     public class VideoAppLaunchDirective : Directive
     {
-        public VideoAppLaunchDirective() : base("VideoApp.Launch") {
+        public VideoAppLaunchDirective() : base("VideoApp.Launch")
+        {
 
         }
 
-        public virtual VideoItem VideoItem {
+        public virtual VideoItem VideoItem
+        {
             get;
             set;
         }

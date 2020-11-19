@@ -9,15 +9,18 @@ namespace AlexaSkillsKit.Speechlet
     /// </summary>
     public class Cause
     {
-        public static Cause FromJson(JObject json) {
+        public static Cause FromJson(JObject json)
+        {
             if (json == null) return null;
 
-            return new Cause {
+            return new Cause
+            {
                 RequestId = json.Value<string>("requestId")
             };
         }
 
-        public string RequestId {
+        public string RequestId
+        {
             get;
             private set;
         }

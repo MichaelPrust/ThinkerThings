@@ -4,21 +4,25 @@ namespace AlexaSkillsKit.UI
 {
     public class StandardCard : Card
     {
-        public override string Type {
+        public override string Type
+        {
             get { return "Standard"; }
         }
 
-        public virtual string Title {
+        public virtual string Title
+        {
             get;
             set;
         }
 
-        public virtual string Text {
+        public virtual string Text
+        {
             get;
             set;
         }
 
-        public virtual Image Image {
+        public virtual Image Image
+        {
             get;
             set;
         }

@@ -1,6 +1,5 @@
 ﻿// Copyright 2018 Stefan Negritoiu (FreeBusy) and contributors. See LICENSE file for more information.
 
-using System;
 using Newtonsoft.Json;
 
 namespace AlexaSkillsKit
@@ -20,7 +19,8 @@ namespace AlexaSkillsKit
         //public const int TIMESTAMP_TOLERANCE_SEC = 150;
         public const int TIMESTAMP_TOLERANCE_SEC = 165;
 
-        public static JsonSerializerSettings DeserializationSettings = new JsonSerializerSettings {
+        public static JsonSerializerSettings DeserializationSettings = new JsonSerializerSettings
+        {
             MissingMemberHandling = MissingMemberHandling.Ignore
         };
     }

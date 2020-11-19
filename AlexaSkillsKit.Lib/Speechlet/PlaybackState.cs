@@ -10,29 +10,34 @@ namespace AlexaSkillsKit.Speechlet
     /// </summary>
     public class PlaybackState
     {
-        public static PlaybackState FromJson(JObject json) {
+        public static PlaybackState FromJson(JObject json)
+        {
             if (json == null) return null;
 
             PlayerActivityEnum playerActivity = PlayerActivityEnum.NONE;
             Enum.TryParse(json.Value<string>("playerActivity"), out playerActivity);
-            return new PlaybackState {
+            return new PlaybackState
+            {
                 Token = json.Value<string>("token"),
                 OffsetInMilliseconds = json.Value<long?>("offsetInMilliseconds"),
                 PlayerActivity = playerActivity
             };
         }
 
-        public string Token {
+        public string Token
+        {
             get;
             private set;
         }
 
-        public long? OffsetInMilliseconds {
+        public long? OffsetInMilliseconds
+        {
             get;
             private set;
         }
 
-        public PlayerActivityEnum PlayerActivity {
+        public PlayerActivityEnum PlayerActivity
+        {
             get;
             private set;
         }

@@ -13,31 +13,37 @@ namespace AlexaSkillsKit.Speechlet
         /// <summary>
         /// Set default ShouldEndSession value to false for the sake of backwards compatibility
         /// </summary>
-        public SpeechletResponse() {
+        public SpeechletResponse()
+        {
             ShouldEndSession = false;
         }
 
-        public virtual Card Card {
+        public virtual Card Card
+        {
             get;
             set;
         }
 
-        public virtual IEnumerable<Directive> Directives {
+        public virtual IEnumerable<Directive> Directives
+        {
             get;
             set;
         }
 
-        public virtual OutputSpeech OutputSpeech {
+        public virtual OutputSpeech OutputSpeech
+        {
             get;
             set;
         }
 
-        public virtual Reprompt Reprompt {
+        public virtual Reprompt Reprompt
+        {
             get;
             set;
         }
 
-        public virtual bool? ShouldEndSession {
+        public virtual bool? ShouldEndSession
+        {
             get;
             set;
         }

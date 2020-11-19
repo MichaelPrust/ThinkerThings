@@ -4,7 +4,8 @@ namespace AlexaSkillsKit.Speechlet
 {
     public class SessionStartedRequest : SpeechletRequest
     {
-        public SessionStartedRequest(SpeechletRequest other) : base(other) {
+        public SessionStartedRequest(SpeechletRequest other) : base(other)
+        {
         }
     }
 }

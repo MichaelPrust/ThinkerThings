@@ -17,9 +17,4 @@
     <ProjectReference Include="..\ThinkerThings.SignalRInterfaces\ThinkerThings.SignalRInterfaces.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="AlexaServices\Interfaces\" />
-    <Folder Include="Speechlet\" />
-  </ItemGroup>
-
 </Project>

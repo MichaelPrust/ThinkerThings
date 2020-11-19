@@ -7,11 +7,13 @@ namespace AlexaSkillsKit.Interfaces.Dialog.Directives
     /// </summary>
     public class DialogElicitSlotDirective : DialogDirective
     {
-        public DialogElicitSlotDirective() : base("ElicitSlot") {
+        public DialogElicitSlotDirective() : base("ElicitSlot")
+        {
 
         }
 
-        public virtual string SlotToElicit {
+        public virtual string SlotToElicit
+        {
             get;
             set;
         }

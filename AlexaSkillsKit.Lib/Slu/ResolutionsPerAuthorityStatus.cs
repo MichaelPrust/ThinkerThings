@@ -6,15 +6,18 @@ namespace AlexaSkillsKit.Slu
 {
     public class ResolutionsPerAuthorityStatus
     {
-        public static ResolutionsPerAuthorityStatus FromJson(JObject json) {
+        public static ResolutionsPerAuthorityStatus FromJson(JObject json)
+        {
             if (json == null) return null;
 
-            return new ResolutionsPerAuthorityStatus {
+            return new ResolutionsPerAuthorityStatus
+            {
                 Code = json.Value<string>("code")
             };
         }
 
-        public virtual string Code {
+        public virtual string Code
+        {
             get;
             set;
         }

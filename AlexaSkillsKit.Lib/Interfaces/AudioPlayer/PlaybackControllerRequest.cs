@@ -12,7 +12,8 @@ namespace AlexaSkillsKit.Interfaces.AudioPlayer
     {
         public static readonly string TypeName = "PlaybackController";
 
-        public PlaybackControllerRequest(string subtype, JObject json) : base(TypeName, subtype, json) {
+        public PlaybackControllerRequest(string subtype, JObject json) : base(TypeName, subtype, json)
+        {
         }
     }
 }

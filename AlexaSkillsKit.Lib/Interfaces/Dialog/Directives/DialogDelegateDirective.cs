@@ -7,7 +7,8 @@ namespace AlexaSkillsKit.Interfaces.Dialog.Directives
     /// </summary>
     public class DialogDelegateDirective : DialogDirective
     {
-        public DialogDelegateDirective() : base("Delegate") {
+        public DialogDelegateDirective() : base("Delegate")
+        {
 
         }
     }

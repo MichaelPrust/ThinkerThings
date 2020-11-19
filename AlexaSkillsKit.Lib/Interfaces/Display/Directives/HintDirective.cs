@@ -9,11 +9,13 @@ namespace AlexaSkillsKit.Interfaces.Display.Directives
     /// </summary>
     public class HintDirective : Directive
     {
-        public HintDirective() : base("Hint") {
+        public HintDirective() : base("Hint")
+        {
 
         }
 
-        public virtual TextField Hint {
+        public virtual TextField Hint
+        {
             get;
             set;
         }

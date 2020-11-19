@@ -7,7 +7,8 @@ namespace AlexaSkillsKit.Interfaces.Dialog.Directives
     /// </summary>
     public class DialogConfirmIntentDirective : DialogDirective
     {
-        public DialogConfirmIntentDirective() : base("ConfirmIntent") {
+        public DialogConfirmIntentDirective() : base("ConfirmIntent")
+        {
 
         }
     }

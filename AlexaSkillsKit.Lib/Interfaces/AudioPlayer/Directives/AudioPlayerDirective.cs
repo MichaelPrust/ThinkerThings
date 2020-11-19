@@ -9,7 +9,8 @@ namespace AlexaSkillsKit.Interfaces.AudioPlayer.Directives
     /// </summary>
     public class AudioPlayerDirective : Directive
     {
-        public AudioPlayerDirective(string subtype) : base($"AudioPlayer.{subtype}") {
+        public AudioPlayerDirective(string subtype) : base($"AudioPlayer.{subtype}")
+        {
 
         }
     }

@@ -9,12 +9,14 @@ namespace AlexaSkillsKit.Interfaces.Display
     /// </summary>
     public class DisplayImage
     {
-        public virtual string ContentDescription {
+        public virtual string ContentDescription
+        {
             get;
             set;
         }
 
-        public virtual IEnumerable<DisplayImageSource> Sources {
+        public virtual IEnumerable<DisplayImageSource> Sources
+        {
             get;
             set;
         }

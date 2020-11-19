@@ -11,23 +11,27 @@ namespace AlexaSkillsKit.Speechlet
     /// </summary>
     public class Error
     {
-        public static Error FromJson(JObject json) {
+        public static Error FromJson(JObject json)
+        {
             if (json == null) return null;
 
             TypeEnum type = TypeEnum.NONE;
             Enum.TryParse(json.Value<string>("type"), out type);
-            return new Error {
+            return new Error
+            {
                 Type = type,
                 Message = json.Value<string>("message")
             };
         }
 
-        public TypeEnum Type {
+        public TypeEnum Type
+        {
             get;
             private set;
         }
 
-        public string Message {
+        public string Message
+        {
             get;
             private set;
         }

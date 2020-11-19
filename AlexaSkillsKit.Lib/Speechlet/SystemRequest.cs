@@ -11,7 +11,8 @@ namespace AlexaSkillsKit.Speechlet
     {
         public static readonly string TypeName = "System";
 
-        public SystemRequest(string subtype, JObject json) : base(TypeName, subtype, json) {
+        public SystemRequest(string subtype, JObject json) : base(TypeName, subtype, json)
+        {
         }
     }
 }

@@ -7,16 +7,19 @@ namespace AlexaSkillsKit.Interfaces.AudioPlayer.Directives
     /// </summary>
     public class AudioPlayerPlayDirective : AudioPlayerDirective
     {
-        public AudioPlayerPlayDirective() : base("Play") {
+        public AudioPlayerPlayDirective() : base("Play")
+        {
 
         }
 
-        public virtual PlayBehaviorEnum PlayBehavior {
+        public virtual PlayBehaviorEnum PlayBehavior
+        {
             get;
             set;
         }
 
-        public virtual AudioItem AudioItem {
+        public virtual AudioItem AudioItem
+        {
             get;
             set;
         }

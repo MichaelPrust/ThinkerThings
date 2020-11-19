@@ -1,10 +1,10 @@
 ﻿// Copyright 2018 Stefan Negritoiu (FreeBusy) and contributors. See LICENSE file for more information.
 
-using System;
+using AlexaSkillsKit.Authentication;
+using AlexaSkillsKit.Speechlet;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using AlexaSkillsKit.Speechlet;
-using AlexaSkillsKit.Authentication;
+using System;
 
 namespace AlexaSkillsKit.Json
 {
@@ -12,7 +12,8 @@ namespace AlexaSkillsKit.Json
     {
         public static SpeechletRequestParser RequestParser { get; } = new SpeechletRequestParser();
 
-        static SpeechletRequestEnvelope() {
+        static SpeechletRequestEnvelope()
+        {
             RequestParser.AddStandard();
             RequestParser.AddSystem();
             RequestParser.AddAudioPlayer();
@@ -25,8 +26,10 @@ namespace AlexaSkillsKit.Json
         /// </summary>
         /// <param name="content"></param>
         /// <returns></returns>
-        public static SpeechletRequestEnvelope FromJson(string content) {
-            if (String.IsNullOrEmpty(content)) {
+        public static SpeechletRequestEnvelope FromJson(string content)
+        {
+            if (String.IsNullOrEmpty(content))
+            {
                 throw new SpeechletValidationException(SpeechletRequestValidationResult.NoContent, "Request content is empty");
             }
 
@@ -40,13 +43,16 @@ namespace AlexaSkillsKit.Json
         /// </summary>
         /// <param name="json"></param>
         /// <returns></returns>
-        public static SpeechletRequestEnvelope FromJson(JObject json) {
+        public static SpeechletRequestEnvelope FromJson(JObject json)
+        {
             var version = json.Value<string>("version");
-            if (version != null && version != Sdk.VERSION) {
+            if (version != null && version != Sdk.VERSION)
+            {
                 throw new SpeechletValidationException(SpeechletRequestValidationResult.InvalidVersion, "Request must conform to 1.0 schema.");
             }
 
-            return new SpeechletRequestEnvelope {
+            return new SpeechletRequestEnvelope
+            {
                 Version = version,
                 Request = RequestParser.Parse(json.Value<JObject>("request")),
                 Session = Session.FromJson(json.Value<JObject>("session")),
@@ -55,22 +61,26 @@ namespace AlexaSkillsKit.Json
         }
 
 
-        public virtual SpeechletRequest Request {
+        public virtual SpeechletRequest Request
+        {
             get;
             set;
         }
 
-        public virtual Session Session {
+        public virtual Session Session
+        {
             get;
             set;
         }
 
-        public virtual string Version {
+        public virtual string Version
+        {
             get;
             set;
         }
 
-        public virtual Context Context {
+        public virtual Context Context
+        {
             get;
             set;
         }

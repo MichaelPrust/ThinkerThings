@@ -13,7 +13,8 @@ namespace AlexaSkillsKit.Speechlet
     {
         public SpeechletService Service { get; }
 
-        protected SpeechletBase() {
+        protected SpeechletBase()
+        {
             Service = new SpeechletService(this);
         }
 
@@ -23,11 +24,13 @@ namespace AlexaSkillsKit.Speechlet
         /// </summary>
         /// <param name="httpRequest"></param>
         /// <returns></returns>
-        public HttpResponseMessage GetResponse(HttpRequestMessage httpRequest) {
+        public HttpResponseMessage GetResponse(HttpRequestMessage httpRequest)
+        {
             return AsyncHelpers.RunSync(async () => await Service.GetResponseAsync(httpRequest));
         }
 
-        public async Task<HttpResponseMessage> GetResponseAsync(HttpRequestMessage httpRequest) {
+        public async Task<HttpResponseMessage> GetResponseAsync(HttpRequestMessage httpRequest)
+        {
             return await Service.GetResponseAsync(httpRequest);
         }
 
@@ -37,11 +40,13 @@ namespace AlexaSkillsKit.Speechlet
         /// </summary>
         /// <param name="requestContent"></param>
         /// <returns></returns>
-        public string ProcessRequest(string requestContent) {
+        public string ProcessRequest(string requestContent)
+        {
             return AsyncHelpers.RunSync(async () => await ProcessRequestAsync(requestContent));
         }
 
-        public async Task<string> ProcessRequestAsync(string requestContent) {
+        public async Task<string> ProcessRequestAsync(string requestContent)
+        {
             var requestEnvelope = SpeechletRequestEnvelope.FromJson(requestContent);
             return (await Service.ProcessRequestAsync(requestEnvelope))?.ToJson();
         }
@@ -52,11 +57,13 @@ namespace AlexaSkillsKit.Speechlet
         /// </summary>
         /// <param name="requestJson"></param>
         /// <returns></returns>
-        public virtual string ProcessRequest(JObject requestJson) {
+        public virtual string ProcessRequest(JObject requestJson)
+        {
             return AsyncHelpers.RunSync(async () => await ProcessRequestAsync(requestJson));
         }
 
-        public async Task<string> ProcessRequestAsync(JObject requestJson) {
+        public async Task<string> ProcessRequestAsync(JObject requestJson)
+        {
             var requestEnvelope = SpeechletRequestEnvelope.FromJson(requestJson);
             return (await Service.ProcessRequestAsync(requestEnvelope))?.ToJson();
         }
@@ -67,8 +74,9 @@ namespace AlexaSkillsKit.Speechlet
         /// </summary>
         /// <returns>true if request processing should continue, otherwise false</returns>
         public virtual bool OnRequestValidation(
-            SpeechletRequestValidationResult result, DateTime referenceTimeUtc, SpeechletRequestEnvelope requestEnvelope) {
-            
+            SpeechletRequestValidationResult result, DateTime referenceTimeUtc, SpeechletRequestEnvelope requestEnvelope)
+        {
+
             return result == SpeechletRequestValidationResult.OK;
         }
     }

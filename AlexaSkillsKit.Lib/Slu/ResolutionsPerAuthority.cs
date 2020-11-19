@@ -8,29 +8,34 @@ namespace AlexaSkillsKit.Slu
 {
     public class ResolutionsPerAuthority
     {
-        public static ResolutionsPerAuthority FromJson(JObject json) {
+        public static ResolutionsPerAuthority FromJson(JObject json)
+        {
             if (json == null) return null;
 
             var values = json.Value<JArray>("values")?.Children()
                 .Select(x => ResolutionsPerAuthorityValue.FromJson(x.Value<JObject>()));
-            return new ResolutionsPerAuthority {
+            return new ResolutionsPerAuthority
+            {
                 Authority = json.Value<string>("authority"),
                 Status = ResolutionsPerAuthorityStatus.FromJson(json.Value<JObject>("status")),
                 Values = values
             };
         }
 
-        public virtual string Authority {
+        public virtual string Authority
+        {
             get;
             set;
         }
 
-        public virtual ResolutionsPerAuthorityStatus Status {
+        public virtual ResolutionsPerAuthorityStatus Status
+        {
             get;
             set;
         }
 
-        public virtual IEnumerable<ResolutionsPerAuthorityValue> Values {
+        public virtual IEnumerable<ResolutionsPerAuthorityValue> Values
+        {
             get;
             set;
         }

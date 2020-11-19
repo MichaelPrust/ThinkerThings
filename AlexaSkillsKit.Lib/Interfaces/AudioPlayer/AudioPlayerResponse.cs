@@ -11,7 +11,8 @@ namespace AlexaSkillsKit.Interfaces.AudioPlayer
     /// </summary>
     public class AudioPlayerResponse : ISpeechletResponse
     {
-        public virtual IEnumerable<AudioPlayerDirective> Directives {
+        public virtual IEnumerable<AudioPlayerDirective> Directives
+        {
             get;
             set;
         }

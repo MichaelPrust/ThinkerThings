@@ -7,17 +7,20 @@ namespace AlexaSkillsKit.Interfaces.Display
     /// </summary>
     public class TextContent
     {
-        public virtual TextField PrimaryText {
+        public virtual TextField PrimaryText
+        {
             get;
             set;
         }
 
-        public virtual TextField SecondaryText {
+        public virtual TextField SecondaryText
+        {
             get;
             set;
         }
 
-        public virtual TextField TertiaryText {
+        public virtual TextField TertiaryText
+        {
             get;
             set;
         }

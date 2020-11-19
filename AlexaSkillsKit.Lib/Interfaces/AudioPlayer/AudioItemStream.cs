@@ -7,22 +7,26 @@ namespace AlexaSkillsKit.Interfaces.AudioPlayer
     /// </summary>
     public class AudioItemStream
     {
-        public virtual string Url {
+        public virtual string Url
+        {
             get;
             set;
         }
 
-        public virtual string Token {
+        public virtual string Token
+        {
             get;
             set;
         }
 
-        public virtual string ExpectedPreviousToken {
+        public virtual string ExpectedPreviousToken
+        {
             get;
             set;
         }
 
-        public virtual long OffsetInMilliseconds {
+        public virtual long OffsetInMilliseconds
+        {
             get;
             set;
         }

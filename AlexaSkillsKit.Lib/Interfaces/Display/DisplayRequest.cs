@@ -12,11 +12,13 @@ namespace AlexaSkillsKit.Interfaces.Display
     {
         public static readonly string TypeName = "Display";
 
-        public DisplayRequest(string subtype, JObject json) : base(TypeName, subtype, json) {
+        public DisplayRequest(string subtype, JObject json) : base(TypeName, subtype, json)
+        {
             Token = json.Value<string>("token");
         }
 
-        public string Token {
+        public string Token
+        {
             get;
             private set;
         }

@@ -7,12 +7,14 @@ namespace AlexaSkillsKit.Interfaces.Display
     /// </summary>
     public class TextField
     {
-        public virtual TextTypeEnum Type {
+        public virtual TextTypeEnum Type
+        {
             get;
             set;
         }
 
-        public virtual string Text {
+        public virtual string Text
+        {
             get;
             set;
         }

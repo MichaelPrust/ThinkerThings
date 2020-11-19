@@ -9,11 +9,13 @@ namespace AlexaSkillsKit.UI
     /// </summary>
     public class AskForPermissionsConsentCard : Card
     {
-        public override string Type {
+        public override string Type
+        {
             get { return "AskForPermissionsConsent"; }
         }
 
-        public virtual IEnumerable<string> Permissions {
+        public virtual IEnumerable<string> Permissions
+        {
             get;
             set;
         }

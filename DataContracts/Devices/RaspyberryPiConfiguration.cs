@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
+﻿using System.Runtime.Serialization;
 using ThinkerThings.DataContracts.Common;
 
 namespace ThinkerThings.DataContracts.Devices

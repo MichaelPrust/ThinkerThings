@@ -7,17 +7,20 @@ namespace AlexaSkillsKit.Interfaces.Display
     /// </summary>
     public class ListItem
     {
-        public virtual string Token {
+        public virtual string Token
+        {
             get;
             set;
         }
 
-        public virtual DisplayImage Image {
+        public virtual DisplayImage Image
+        {
             get;
             set;
         }
 
-        public virtual TextContent TextContent {
+        public virtual TextContent TextContent
+        {
             get;
             set;
         }

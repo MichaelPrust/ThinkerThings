@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ThinkerThings.SignalRInterfaces
+﻿namespace ThinkerThings.SignalRInterfaces
 {
     public class Class1
     {

@@ -7,7 +7,8 @@ namespace AlexaSkillsKit.Speechlet
 {
     public class SessionEndedRequest : SpeechletRequest
     {
-        public SessionEndedRequest(JObject json) : base(json) {
+        public SessionEndedRequest(JObject json) : base(json)
+        {
 
             ReasonEnum reason = ReasonEnum.UNKNOWN;
             Enum.TryParse(json.Value<string>("reason"), out reason);
@@ -15,12 +16,14 @@ namespace AlexaSkillsKit.Speechlet
             Error = Error.FromJson(json.Value<JObject>("error"));
         }
 
-        public virtual ReasonEnum Reason {
+        public virtual ReasonEnum Reason
+        {
             get;
             private set;
         }
 
-        public Error Error {
+        public Error Error
+        {
             get;
             private set;
         }

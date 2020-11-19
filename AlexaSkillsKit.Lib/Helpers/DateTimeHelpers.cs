@@ -1,23 +1,27 @@
 ﻿// Copyright 2018 Stefan Negritoiu (FreeBusy) and contributors. See LICENSE file for more information.
 
-using System;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace AlexaSkillsKit.Helpers
 {
     public class DateTimeHelpers
     {
-        public static DateTime FromAlexaTimestamp(JObject requestJson) {
-            try {
+        public static DateTime FromAlexaTimestamp(JObject requestJson)
+        {
+            try
+            {
                 return requestJson["timestamp"].Value<DateTime>();
             }
-            catch (Exception ex) 
-            when (ex is InvalidCastException || ex is FormatException) {
-                try {
+            catch (Exception ex)
+            when (ex is InvalidCastException || ex is FormatException)
+            {
+                try
+                {
                     return FromUnixTimeMilliseconds(requestJson["timestamp"].Value<string>()).DateTime;
                 }
-                catch (ArgumentOutOfRangeException) {
+                catch (ArgumentOutOfRangeException)
+                {
                     throw ex;
                 }
             }
@@ -34,11 +38,13 @@ namespace AlexaSkillsKit.Helpers
         /// <returns>
         /// A date and time value that represents the same moment in time as the Unix time.
         /// </returns>
-        public static DateTimeOffset FromUnixTimeMilliseconds(string timestamp) {
+        public static DateTimeOffset FromUnixTimeMilliseconds(string timestamp)
+        {
             long milliseconds;
             if (!long.TryParse(timestamp, out milliseconds) ||
                 milliseconds < -62135596800000 ||
-                milliseconds > 253402300799999) {
+                milliseconds > 253402300799999)
+            {
                 throw new ArgumentOutOfRangeException("timestamp");
             }
 

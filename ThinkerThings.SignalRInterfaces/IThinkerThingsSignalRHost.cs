@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ThinkerThings.DataContracts.Commands;
+﻿using ThinkerThings.DataContracts.Commands;
 
 namespace ThinkerThings.SignalRInterfaces
 {

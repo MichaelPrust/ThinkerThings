@@ -9,42 +9,50 @@ namespace AlexaSkillsKit.Interfaces.Display
     /// </summary>
     public class DisplayTemplate
     {
-        public virtual string Type {
+        public virtual string Type
+        {
             get;
             set;
         }
 
-        public virtual string Token {
+        public virtual string Token
+        {
             get;
             set;
         }
 
-        public virtual string Title {
+        public virtual string Title
+        {
             get;
             set;
         }
 
-        public virtual TextContent TextContent {
+        public virtual TextContent TextContent
+        {
             get;
             set;
         }
 
-        public virtual ButtonStateEnum BackButton {
+        public virtual ButtonStateEnum BackButton
+        {
             get;
             set;
         }
 
-        public virtual DisplayImage BackgroundImage {
+        public virtual DisplayImage BackgroundImage
+        {
             get;
             set;
         }
 
-        public virtual DisplayImage Image {
+        public virtual DisplayImage Image
+        {
             get;
             set;
         }
 
-        public virtual IEnumerable<ListItem> ListItems {
+        public virtual IEnumerable<ListItem> ListItems
+        {
             get;
             set;
         }

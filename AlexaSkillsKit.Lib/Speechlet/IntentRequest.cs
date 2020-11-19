@@ -8,7 +8,8 @@ namespace AlexaSkillsKit.Speechlet
 {
     public class IntentRequest : SpeechletRequest
     {
-        public IntentRequest(JObject json) : base(json) {
+        public IntentRequest(JObject json) : base(json)
+        {
             Intent = Intent.FromJson(json.Value<JObject>("intent"));
 
             DialogStateEnum dialogState = DialogStateEnum.UNKNOWN;
@@ -16,12 +17,14 @@ namespace AlexaSkillsKit.Speechlet
             DialogState = dialogState;
         }
 
-        public virtual Intent Intent {
+        public virtual Intent Intent
+        {
             get;
             private set;
         }
 
-        public virtual DialogStateEnum DialogState {
+        public virtual DialogStateEnum DialogState
+        {
             get;
             private set;
         }

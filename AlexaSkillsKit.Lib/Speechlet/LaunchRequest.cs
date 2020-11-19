@@ -6,7 +6,8 @@ namespace AlexaSkillsKit.Speechlet
 {
     public class LaunchRequest : SpeechletRequest
     {
-        public LaunchRequest(JObject json) : base(json) {
+        public LaunchRequest(JObject json) : base(json)
+        {
         }
     }
 }
