@@ -1,7 +1,6 @@
 ﻿using AlexaSkillsKit.Slu;
 using AlexaSkillsKit.Speechlet;
 using AlexaSkillsKit.UI;
-using System.Collections.Generic;
 using ThinkerThingsHost.AlexaServices.IntentExecutor;
 using ThinkerThingsHost.Interfaces;
 
@@ -9,10 +8,7 @@ namespace ThinkerThingsHost.AlexaServices
 {
     internal class ThinkerThingsSpeechlet : SpeechletBase, ISpeechletWithContext, IThinkerThingsSpeechlet
     {
-
         private readonly IAlexaProxyService _alexaProxyService;
-
-        private const string PortNameSlotName = "portName";
 
         public ThinkerThingsSpeechlet(IAlexaProxyService alexaProxyService)
         {
@@ -55,26 +51,6 @@ namespace ThinkerThingsHost.AlexaServices
         public void OnSessionStarted(SessionStartedRequest sessionStartedRequest, Session session, Context context)
         {
 
-        }
-
-        private SpeechletResponse GetStatus(Intent intent, Session session)
-        {
-            IDictionary<string, Slot> slots = intent.Slots;
-
-            Slot portNameSlot = slots[PortNameSlotName];
-            string speechOutput;
-            if (portNameSlot != null)
-            {
-                speechOutput = _alexaProxyService.GetStatusMessage(portNameSlot.Value);
-
-            }
-            else
-            {
-                speechOutput = "Não foi possível determinar o dispositivo";
-            }
-
-            var result = BuildSpeechletResponse("Status", speechOutput, false);
-            return result;
         }
 
         private SpeechletResponse BuildSpeechletResponse(string title, string output, bool shouldEndSession)

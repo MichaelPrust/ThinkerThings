@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using ThinkerThings.DataContracts.Commands;
 using ThinkerThings.DataContracts.Common;
 using ThinkerThings.SignalRInterfaces;
-using ThinkerThingsHost.AlexaServices;
 using ThinkerThingsHost.Interfaces;
 using ThinkerThingsHost.SignalRHost;
 
@@ -13,23 +11,8 @@ namespace ThinkerThingsHost.Devices
 {
     internal class AlexaProxyService : IAlexaProxyService
     {
-        private static readonly string[] ActivateIntents = new string[]
-        {
-            AlexaIntents.ActivateIntent.Name
-        };
-
-        private static readonly string[] DeactivateIntents = new string[]
-        {
-            AlexaIntents.DeactivateIntent.Name
-        };
-
         private readonly IDevicesStateProvider _devicesStateProvider;
         private readonly IHubContext<SignalRHostImplementation, IThinkerThingsSignalRClient> _thinkerThingsSignalRHubContext;
-
-        private readonly List<Tuple<string, string>> _sinonimos = new List<Tuple<string, string>>()
-        {
-            Tuple.Create("4.º", "quarto"),
-        };
 
         public AlexaProxyService(IDevicesStateProvider devicesStateProvider, IHubContext<SignalRHostImplementation, IThinkerThingsSignalRClient> thinkerThingsSignalRHubContext)
         {
@@ -37,34 +20,9 @@ namespace ThinkerThingsHost.Devices
             _thinkerThingsSignalRHubContext = thinkerThingsSignalRHubContext;
         }
 
-        public string GetStatusMessage(string portName)
+        public IDevicePortState GetStateOfPort(string portName)
         {
-            portName = TraduzirSinonimosDaMensagem(portName);
-            var portState = _devicesStateProvider.GetStateOfPort(portName);
-
-            string result;
-            if (portState != null)
-            {
-                switch (portState.PortState)
-                {
-                    case PortStates.None:
-                        result = $"{portName} não está configurada";
-                        break;
-                    case PortStates.Actived:
-                        result = $"{portName} está ligada";
-                        break;
-                    case PortStates.Deactived:
-                        result = $"{portName} está desligada";
-                        break;
-                    default:
-                        result = $"O estatus de {portName} é {portState.PortState} e não há suporte para ele";
-                        break;
-                }
-            }
-            else
-            {
-                result = $"Não foi possível encontrar {portName}";
-            }
+            var result = _devicesStateProvider.GetStateOfPort(portName);
             return result;
         }
 
@@ -123,16 +81,6 @@ namespace ThinkerThingsHost.Devices
             return true;
         }
 
-        private string TraduzirSinonimosDaMensagem(string message)
-        {
-            string result = message;
-            foreach (var sinonimo in _sinonimos)
-            {
-                result = result.Replace(sinonimo.Item1, sinonimo.Item2);
-            }
-            return result;
-        }
-
         private string AlterarEstadoDaPorta(string portName, PortStates targetPortState, IDevicePortState portState)
         {
             string result;
@@ -158,6 +106,7 @@ namespace ThinkerThingsHost.Devices
 
             return result;
         }
+
     }
 
 }
